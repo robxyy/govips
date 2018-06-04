@@ -52,6 +52,7 @@ int transform_image(VipsImage *in, VipsImage **out, double a, double b, double c
 int gaussian_blur(VipsImage *in, VipsImage **out, double sigma);
 int invert_image(VipsImage *in, VipsImage **out);
 int composite(VipsImage **in, VipsImage **out, int n, int mode);
+int is_opaque(VipsImage *in);
 
 void gobject_set_property(VipsObject* object, const char* name, const GValue* value);
 
