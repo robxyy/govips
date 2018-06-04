@@ -294,6 +294,10 @@ func vipsHasAlpha(image *C.VipsImage) bool {
 	return int(C.has_alpha_channel(image)) > 0
 }
 
+func vipsOpaque(image *C.VipsImage) bool {
+	return int(C.is_opaque(image)) > 0
+}
+
 func vipsAdd(left *C.VipsImage, right *C.VipsImage) (*C.VipsImage, error) {
 	incOpCounter("add")
 	defer C.g_object_unref(C.gpointer(left))

@@ -142,6 +142,11 @@ func (ref *ImageRef) HasAlpha() bool {
 	return vipsHasAlpha(ref.image)
 }
 
+// Opaque scans the entire image and reports whether it is fully opaque.
+func (ref *ImageRef) Opaque() bool {
+	return vipsOpaque(ref.image)
+}
+
 // Coding returns the image coding
 func (ref *ImageRef) Coding() Coding {
 	return Coding(int(ref.image.Coding))

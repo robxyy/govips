@@ -128,6 +128,24 @@ int extract_band(VipsImage *in, VipsImage **out, int band, int num) {
 	return vips_extract_band(in, out, band, NULL);
 }
 
+int is_opaque(VipsImage *in) {
+  if (!has_alpha_channel(in)) {
+    return 1;
+  } else {
+    double min;
+    VipsImage *t;
+    if (vips_extract_band(in, &t, in->Bands - 1, NULL)) {
+      return 0;
+    }
+    if (vips_min(t, &min, NULL)) {
+      g_object_unref(t);
+      return 0;
+    }
+    g_object_unref(t);
+    return min == 255 ? 1 : 0;
+  }
+}
+
 int linear1(VipsImage *in, VipsImage **out, double a, double b) {
 	return vips_linear1(in, out, a, b, NULL);
 }
